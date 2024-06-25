@@ -3,15 +3,15 @@ import streamlit as st
 from datetime import datetime
 import base64
 import uuid
-import re
 import subprocess
 
-# Función para instalar openpyxl si no está instalado
+# Verificar si openpyxl está instalado y, si no, instalarlo
 def install_openpyxl():
     try:
         import openpyxl
     except ImportError:
         subprocess.check_call(["python", '-m', 'pip', 'install', 'openpyxl'])
+        import openpyxl
 
 install_openpyxl()
 
