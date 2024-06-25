@@ -4,6 +4,16 @@ from datetime import datetime
 import base64
 import uuid
 import re
+import subprocess
+
+# Función para instalar openpyxl si no está instalado
+def install_openpyxl():
+    try:
+        import openpyxl
+    except ImportError:
+        subprocess.check_call(["python", '-m', 'pip', 'install', 'openpyxl'])
+
+install_openpyxl()
 
 # Función para generar el enlace de descarga
 def download_button(object_to_download, download_filename, button_text):
