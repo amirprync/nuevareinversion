@@ -56,6 +56,9 @@ if uploaded_file:
     # Leer el archivo Excel
     df = pd.read_excel(uploaded_file, engine='openpyxl')
 
+    # Filtrar las columnas necesarias
+    df = df[['Moneda', 'ComitenteNumero', 'Importe']]
+
     # Mostrar el contenido del archivo
     st.write("Contenido del archivo:")
     st.dataframe(df)
@@ -65,18 +68,17 @@ if uploaded_file:
     ict_content = []
     
     for index, row in df.iterrows():
-        # Ejemplo de cómo completar las variables, ajustar según sea necesario
-        SourceCashAccount = row['Numero']
-        ReceivingCashAccount = 'ReceivingAccount'  # Ajustar según sea necesario
-        TransactionReference = 'Ref-' + str(index)
-        PaymentSystem = 'PaymentSystem'  # Ajustar según sea necesario
+        SourceCashAccount = f"46/{row['ComitenteNumero']}"
+        ReceivingCashAccount = "46/1"
+        TransactionReference = f"ICT20240612005"
+        PaymentSystem = "USD-LOCAL"
         Currency = row['Moneda']
-        Amount = 0  # Ajustar según sea necesario
-        SettlementDate = datetime.now().strftime('%Y-%m-%d')
-        Description = 'Description'  # Ajustar según sea necesario
-        CorporateActionReference = 'CorpAct-' + str(index)
-        TransactionOnHoldCSD = 'No'
-        TransactionOnHoldParticipant = 'No'
+        Amount = row['Importe']
+        SettlementDate = "20240612"
+        Description = "Description"
+        CorporateActionReference = ""
+        TransactionOnHoldCSD = "0"
+        TransactionOnHoldParticipant = "0"
 
         ict_line = f"{SourceCashAccount};{ReceivingCashAccount};{TransactionReference};{PaymentSystem};{Currency};{Amount};{SettlementDate};{Description};{CorporateActionReference};{TransactionOnHoldCSD};{TransactionOnHoldParticipant}\n"
         ict_content.append(ict_line)
