@@ -47,7 +47,7 @@ def download_button(object_to_download, download_filename, button_text):
     return dl_link
 
 # Título de la aplicación
-st.title("Generador de archivo ICT")
+st.title("Generador de archivo ICT para reinversiones en NSQ")
 
 # Subir archivo Excel
 uploaded_file = st.file_uploader("Carga tu archivo de Excel", type=['xlsx'])
