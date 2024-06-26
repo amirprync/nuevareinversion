@@ -82,7 +82,7 @@ if uploaded_file:
     for index, row in df.iterrows():
         SourceCashAccount = f"46/{row['ComitenteNumero']}"
         ReceivingCashAccount = "46/1"
-        TransactionReference = f"ICT{current_date}005"
+        TransactionReference = f"ICT{current_date}{index + 1:03d}"
         PaymentSystem = convert_currency(row['Moneda'])
         Currency = 'USD'
         Amount = row['Importe']
