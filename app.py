@@ -70,7 +70,7 @@ if uploaded_file:
     def convert_currency(moneda):
         if moneda == 'Dolar Renta Local - 10.000':
             return 'USD-LOCAL'
-        elif moneda == 'Dolar Renta Local - 7.000':
+        elif moneda == 'Dolar Renta Exterior - 7.000':
             return 'USD-EXTERNO'
         else:
             return moneda
