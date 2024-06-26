@@ -63,18 +63,30 @@ if uploaded_file:
     st.write("Contenido del archivo:")
     st.dataframe(df)
 
+    # Obtener la fecha actual en el formato requerido
+    current_date = datetime.now().strftime('%Y%m%d')
+
+    # Función para convertir el valor de la moneda
+    def convert_currency(moneda):
+        if moneda == 'Dolar Renta Local - 10.000':
+            return 'USD-LOCAL'
+        elif moneda == 'Dolar Renta Local - 7.000':
+            return 'USD-EXTERNO'
+        else:
+            return moneda
+
     # Preparar el contenido del archivo .ict
     ict_header = "SourceCashAccount;ReceivingCashAccount;TransactionReference;PaymentSystem;Currency;Amount;SettlementDate;Description;CorporateActionReference;TransactionOnHoldCSD;TransactionOnHoldParticipant\n"
     ict_content = []
-    
+
     for index, row in df.iterrows():
         SourceCashAccount = f"46/{row['ComitenteNumero']}"
         ReceivingCashAccount = "46/1"
-        TransactionReference = f"ICT20240612005"
-        PaymentSystem = "USD-LOCAL"
-        Currency = row['Moneda']
+        TransactionReference = f"ICT{current_date}005"
+        PaymentSystem = convert_currency(row['Moneda'])
+        Currency = 'USD'
         Amount = row['Importe']
-        SettlementDate = "20240612"
+        SettlementDate = current_date
         Description = "Description"
         CorporateActionReference = ""
         TransactionOnHoldCSD = "0"
