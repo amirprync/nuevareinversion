@@ -1,3 +1,2 @@
---disable-pip-version-check
 pandas
 openpyxl
